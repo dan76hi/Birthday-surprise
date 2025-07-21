@@ -222,7 +222,23 @@
         speedY: Math.random() * 3 + 2
       }));
 
-      function showVideoPopup(link) {
+      function draw() {
+        confetti.clearRect(0, 0, canvas.width, canvas.height);
+        for (let p of pieces) {
+          confetti.fillStyle = p.color;
+          confetti.beginPath();
+          confetti.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          confetti.fill();
+          p.y += p.speedY;
+          if (p.y > canvas.height) p.y = 0;
+        }
+        requestAnimationFrame(draw);
+      }
+
+      draw();
+    }
+
+    function showVideoPopup(link) {
     const popup = document.getElementById('videoPopup');
     const video = document.getElementById('birthdayVideo');
     const source = document.getElementById('videoSource');
@@ -239,22 +255,6 @@
     video.pause();
     video.currentTime = 0;
   }
-
-      function draw() {
-        confetti.clearRect(0, 0, canvas.width, canvas.height);
-        for (let p of pieces) {
-          confetti.fillStyle = p.color;
-          confetti.beginPath();
-          confetti.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-          confetti.fill();
-          p.y += p.speedY;
-          if (p.y > canvas.height) p.y = 0;
-        }
-        requestAnimationFrame(draw);
-      }
-
-      draw();
-    }
   </script>
 </body>
 </html>
