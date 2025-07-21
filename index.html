@@ -124,7 +124,7 @@
 
   <div class="surprise" id="surprise">
     <h2>Selamat Ulang Tahun, Sayangku!</h2>
-    <p>Aku bersyukur bisa merayakan hari spesialmu, Semoga yang diharapkan bisa Tercapai dan Sehat Selalu. I LOVE YOU SAYANGKUU!!! 💖</p>
+    <p>Aku bersyukur bisa merayakan hari spesialmu, Semoga yang diharapkan bisa Tercapai. I LOVE YOU SAYANGKUU!!! 💖</p>
     <img class="hug-love" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2YxcHk0dWpjZTg0cnFxdDlkd2Y2MDEzM29nb3Vma2J4d21wbWVuciZlcD12MV9naWZzX3NlYXJjaCZjdD1n/xT39CXg70nNS0MFNLy/giphy.gif" alt="Pelukan" />
     <img class="hug-love" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExN3M3ZmlndnF5d2V4cnllZ3diZG5xcm9yNm52ZXJlaXdjanltbXAzMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GJMxynIXk7X1LR50rP/giphy.gif" alt="Love" />
     <div class="confetti" id="confetti"></div>
@@ -134,19 +134,19 @@
     <audio id="fxSurprise">
       <source src="https://cdn.pixabay.com/download/audio/2022/03/31/audio_b7616cd7d3.mp3?filename=fireworks-109046.mp3" type="audio/mp3">
     </audio>
+    <div class="video-control" style="margin-top: 30px;">
+  <button onclick="showVideoPopup('https://files.catbox.moe/ulnxtw.mp4')" class="video-btn">🎬 Tonton Video Ucapan 1</button>
+  <button onclick="showVideoPopup('https://files.catbox.moe/voi7r2.mp4')" class="video-btn">🎬 Tonton Video Ucapan 2</button>
+    </div>
   </div>
 
-  <div class="video-control">
-    <button onclick="showVideoPopup('https://files.catbox.moe/ulnxtw.mp4')" class="video-btn">🎬 Tonton Video Ucapan 1</button>
-    <button onclick="showVideoPopup('https://files.catbox.moe/voi7r2.mp4')" class="video-btn">🎬 Tonton Video Ucapan 2</button>
-  </div>
-  <div id="videoPopup" class="video-popup">
-    <video id="birthdayVideo" controls>
-      <source id="videoSource" src="" type="video/mp4">
-      Browser kamu tidak mendukung video.
-    </video>
-    <button onclick="closeVideoPopup()">Tutup</button>
-  </div>
+  <div id="videoPopup" class="video-popup" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.9); z-index:10000; justify-content:center; align-items:center; flex-direction:column;">
+  <video id="birthdayVideo" controls style="max-width:90%; max-height:70vh; border-radius:10px;">
+    <source id="videoSource" src="" type="video/mp4">
+    Browser kamu tidak mendukung video.
+  </video>
+  <button onclick="closeVideoPopup()" style="margin-top:20px; background:#ff4d6d; color:white; padding:10px 20px; border-radius:20px; border:none; cursor:pointer;">Tutup</button>
+</div>
 
   <script>
     const targetDate = new Date('2025-07-21T00:00:00+07:00');
@@ -222,6 +222,24 @@
         speedY: Math.random() * 3 + 2
       }));
 
+      function showVideoPopup(link) {
+    const popup = document.getElementById('videoPopup');
+    const video = document.getElementById('birthdayVideo');
+    const source = document.getElementById('videoSource');
+    source.src = link;
+    video.load();
+    popup.style.display = 'flex';
+    video.play();
+  }
+
+  function closeVideoPopup() {
+    const popup = document.getElementById('videoPopup');
+    const video = document.getElementById('birthdayVideo');
+    popup.style.display = 'none';
+    video.pause();
+    video.currentTime = 0;
+  }
+
       function draw() {
         confetti.clearRect(0, 0, canvas.width, canvas.height);
         for (let p of pieces) {
@@ -236,23 +254,6 @@
       }
 
       draw();
-    }
-    
-     function showVideoPopup(link) {
-      const popup = document.getElementById('videoPopup');
-      const video = document.getElementById('birthdayVideo');
-      const source = document.getElementById('videoSource');
-      source.src = link;
-      video.load();
-      popup.style.display = 'flex';
-      video.play();
-    }
-    function closeVideoPopup() {
-      const popup = document.getElementById('videoPopup');
-      const video = document.getElementById('birthdayVideo');
-      popup.style.display = 'none';
-      video.pause();
-      video.currentTime = 0;
     }
   </script>
 </body>
