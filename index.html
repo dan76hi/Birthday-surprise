@@ -136,6 +136,18 @@
     </audio>
   </div>
 
+  <div class="video-control">
+    <button onclick="showVideoPopup('https://files.catbox.moe/ulnxtw.mp4')" class="video-btn">🎬 Tonton Video Ucapan 1</button>
+    <button onclick="showVideoPopup('https://files.catbox.moe/voi7r2.mp4')" class="video-btn">🎬 Tonton Video Ucapan 2</button>
+  </div>
+  <div id="videoPopup" class="video-popup">
+    <video id="birthdayVideo" controls>
+      <source id="videoSource" src="" type="video/mp4">
+      Browser kamu tidak mendukung video.
+    </video>
+    <button onclick="closeVideoPopup()">Tutup</button>
+  </div>
+
   <script>
     const targetDate = new Date('2025-07-22T00:00:00+07:00');
     const countdownEl = document.getElementById('countdown');
@@ -224,6 +236,23 @@
       }
 
       draw();
+    }
+    
+     function showVideoPopup(link) {
+      const popup = document.getElementById('videoPopup');
+      const video = document.getElementById('birthdayVideo');
+      const source = document.getElementById('videoSource');
+      source.src = link;
+      video.load();
+      popup.style.display = 'flex';
+      video.play();
+    }
+    function closeVideoPopup() {
+      const popup = document.getElementById('videoPopup');
+      const video = document.getElementById('birthdayVideo');
+      popup.style.display = 'none';
+      video.pause();
+      video.currentTime = 0;
     }
   </script>
 </body>
